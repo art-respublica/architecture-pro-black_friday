@@ -33,3 +33,36 @@ curl --silent http://ifconfig.me
 ## Доступные эндпоинты
 
 Список доступных эндпоинтов, swagger http://<ip виртуальной машины>:8080/docs
+
+# Задание 1: Планирование
+
+Диаграммы расположены в папке /diagrams
+
+[Первый вариант схемы](/diagrams/task1_variant_1.drawio)
+[Второй вариант схемы](/diagrams/task1_variant_2.drawio)
+[Третий вариант схемы](/diagrams/task1_variant_3.drawio)
+
+# Задания 2: Шардирование / mongo-sharding
+
+Папка задания /mongo-sharding
+```shell
+cd /mongo-sharding
+```
+
+Запуск mongodb и приложения
+```shell
+docker compose up -d
+```
+
+Запуск скриптов инициализации в приведенном порядке
+```shell
+./scripts/mongo-init-config.sh
+./scripts/mongo-init-shard1.sh
+./scripts/mongo-init-shard2.sh
+./scripts/mongo-init-router.sh
+```
+
+Заполнение mongodb данными
+```shell
+./scripts/mongo-data-populate.sh
+```
