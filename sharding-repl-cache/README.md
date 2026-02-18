@@ -1,8 +1,8 @@
-# Задания 3: Репликация / mongo-sharding-repl
+# Задание 4: Кеширование / sharding-repl-cache
 
-Папка задания /mongo-sharding-repl
+Папка задания /sharding-repl-cache
 ```shell
-cd /mongo-sharding-repl
+cd /sharding-repl-cache
 ```
 
 Запуск mongodb и приложения
@@ -25,6 +25,8 @@ docker compose up -d
 
 Подтверждения выполнения
 
-[Открытия приложения в браузере](/mongo-sharding-repl/pictures/running_app.png)
-[Распределение документов по шардам](/mongo-sharding-repl/pictures/db_sharedDataDistribution.png)
-[Распределение документов по шардам, базы данных](/mongo-sharding-repl/pictures/db_printShardingStatus_databases.png)
+[Открытия приложения в браузере](/sharding-repl-cache/pictures/running_app.png)
+[Распределение документов по шардам](/sharding-repl-cache/pictures/db_sharedDataDistribution.png)
+[Информация о коллекциях в mongodb](/sharding-repl-cache/pictures/db_showCollectionInfos.png)
+[Открытие страницы /users в первый раз](/sharding-repl-cache/pictures/running_users.png)
+[Открытие страницы /users во второй раз](/sharding-repl-cache/pictures/running_users_cache.png)

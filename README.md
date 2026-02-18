@@ -42,7 +42,7 @@ curl --silent http://ifconfig.me
 [Второй вариант схемы](/diagrams/task1_variant_2.drawio)
 [Третий вариант схемы](/diagrams/task1_variant_3.drawio)
 
-# Задания 2: Шардирование / mongo-sharding
+# Задание 2: Шардирование / mongo-sharding
 
 Папка задания /mongo-sharding
 ```shell
@@ -73,7 +73,7 @@ docker compose up -d
 [Распределение документов по шардам](/mongo-sharding/pictures/db_printShardingStatus.png)
 
 
-# Задания 3: Репликация / mongo-sharding-repl
+# Задание 3: Репликация / mongo-sharding-repl
 
 Папка задания /mongo-sharding-repl
 ```shell
@@ -103,3 +103,37 @@ docker compose up -d
 [Открытия приложения в браузере](/mongo-sharding-repl/pictures/running_app.png)
 [Распределение документов по шардам](/mongo-sharding-repl/pictures/db_sharedDataDistribution.png)
 [Распределение документов по шардам, базы данных](/mongo-sharding-repl/pictures/db_printShardingStatus_databases.png)
+
+
+# Задание 4: Кеширование / sharding-repl-cache
+
+Папка задания /sharding-repl-cache
+```shell
+cd /sharding-repl-cache
+```
+
+Запуск mongodb и приложения
+```shell
+docker compose up -d
+```
+
+Запуск скриптов инициализации в приведенном порядке
+```shell
+./scripts/mongo-init-config.sh
+./scripts/mongo-init-shard1.sh
+./scripts/mongo-init-shard2.sh
+./scripts/mongo-init-router.sh
+```
+
+Заполнение mongodb данными
+```shell
+./scripts/mongo-data-populate.sh
+```
+
+Подтверждения выполнения
+
+[Открытия приложения в браузере](/sharding-repl-cache/pictures/running_app.png)
+[Распределение документов по шардам](/sharding-repl-cache/pictures/db_sharedDataDistribution.png)
+[Информация о коллекциях в mongodb](/sharding-repl-cache/pictures/db_showCollectionInfos.png)
+[Открытие страницы /users в первый раз](/sharding-repl-cache/pictures/running_users.png)
+[Открытие страницы /users во второй раз](/sharding-repl-cache/pictures/running_users_cache.png)

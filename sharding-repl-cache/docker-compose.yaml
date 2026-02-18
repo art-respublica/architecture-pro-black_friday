@@ -1,6 +1,19 @@
-name: mongo-sharding-repl
+name: sharding-repl-cache
 
 services:
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: redis-cache
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - mongo-sharding-net
+    volumes:
+      - redis_data:/data
+    command: redis-server --maxmemory 512mb --maxmemory-policy allkeys-lru
 
   # Config Server
   mongo-config:
@@ -130,6 +143,7 @@ services:
       - mongo-sharding-net
     command: mongos --configdb configReplSet/mongo-sharding-config:27017 --bind_ip_all --port 27017
     depends_on:
+      - redis
       - mongo-config
       - mongo-shard1-1
       - mongo-shard1-2
@@ -158,8 +172,10 @@ services:
     environment:
       MONGODB_URL: "mongodb://mongo-router:27017"
       MONGODB_DATABASE_NAME: "somedb"
+      REDIS_URL: "redis://redis:6379"
 
 volumes:
+  redis_data:
   mongo-sharding-cfg-data:
   mongo-sharding-shard1-1-data:
   mongo-sharding-shard1-2-data:
