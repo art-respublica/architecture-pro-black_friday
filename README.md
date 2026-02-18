@@ -144,3 +144,10 @@ docker compose up -d
 Диаграммы расположены в папке /diagrams
 
 [Четвертый вариант схемы](/diagrams/task1_variant_4.drawio)
+
+
+# Задание 6: CDN
+
+Диаграммы расположены в папке /diagrams
+
+[Пятый вариант схемы](/diagrams/task1_variant_5.drawio)
