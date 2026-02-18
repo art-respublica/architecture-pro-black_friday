@@ -137,3 +137,10 @@ docker compose up -d
 [Информация о коллекциях в mongodb](/sharding-repl-cache/pictures/db_showCollectionInfos.png)
 [Открытие страницы /users в первый раз](/sharding-repl-cache/pictures/running_users.png)
 [Открытие страницы /users во второй раз](/sharding-repl-cache/pictures/running_users_cache.png)
+
+
+# Задание 5: Service Discovery и балансировка с API Gateway
+
+Диаграммы расположены в папке /diagrams
+
+[Четвертый вариант схемы](/diagrams/task1_variant_4.drawio)
