@@ -1,0 +1,101 @@
+name: mongo-sharding-repl
+
+services:
+
+  # Config Server
+  mongo-config:
+    image: mongo:latest
+    container_name: mongo-sharding-config
+    restart: always
+    ports:
+      - "27019:27017"
+    networks:
+      - mongo-sharding-net
+    volumes:
+      - mongo-sharding-cfg-data:/data/db
+    command: mongod --configsvr --replSet configReplSet --bind_ip_all --port 27017
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "admin", "--eval", "quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # Shard 1
+  mongo-shard1:
+    image: mongo:latest
+    container_name: mongo-sharding-shard1
+    restart: always
+    networks:
+      - mongo-sharding-net
+    volumes:
+      - mongo-sharding-shard1-data:/data/db
+    command: mongod --shardsvr --replSet shard1ReplSet --bind_ip_all --port 27017
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "admin", "--eval", "quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # Shard 2
+  mongo-shard2:
+    image: mongo:latest
+    container_name: mongo-sharding-shard2
+    restart: always
+    networks:
+      - mongo-sharding-net
+    volumes:
+      - mongo-sharding-shard2-data:/data/db
+    command: mongod --shardsvr --replSet shard2ReplSet --bind_ip_all --port 27017
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "admin", "--eval", "quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # Query Router
+  mongo-router:
+    image: mongo:latest
+    container_name: mongo-sharding-router
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      - mongo-sharding-net
+    command: mongos --configdb configReplSet/mongo-sharding-config:27017 --bind_ip_all --port 27017
+    depends_on:
+      - mongo-config
+      - mongo-shard1
+      - mongo-shard2
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "admin", "--eval", "quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  pymongo_api:
+    container_name: mongo-sharding-pymongo_api
+    build: 
+      context: api_app
+      dockerfile: Dockerfile
+    networks:
+      - mongo-sharding-net
+    depends_on:
+      - mongo-router
+    ports:
+      - 8080:8080
+    environment:
+      MONGODB_URL: "mongodb://mongo-router:27017"
+      MONGODB_DATABASE_NAME: "somedb"
+
+volumes:
+  mongo-sharding-cfg-data:
+  mongo-sharding-shard1-data:
+  mongo-sharding-shard2-data:
+
+networks:
+  mongo-sharding-net:
+    driver: bridge

@@ -66,3 +66,8 @@ docker compose up -d
 ```shell
 ./scripts/mongo-data-populate.sh
 ```
+
+Подтверждения выполнения
+
+[Открытия приложения в браузере](/mongo-sharding/pictures/running_app.png)
+[Распределение документов по шардам](/mongo-sharding/pictures/db_printShardingStatus.png)
