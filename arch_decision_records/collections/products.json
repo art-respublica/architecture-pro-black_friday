@@ -1,0 +1,21 @@
+{
+  "id": "a6ecfc37-e0c9-4d3b-abc4-a636d3d87bc7",
+  "category_id": "55b85118-7d05-4dd8-8b71-f8b403dc9527",
+  "name": "Мобильный телефон Samsung S25 FE",
+  "price": 56245.34,
+  "attributes": {
+    "colour": "white",
+    "size": "M"
+  },
+  "available": 16,
+  "remaining": [
+    {
+      "geozone": "Moscow",
+      "available": 15
+    },
+    {
+      "geozone": "Pskov",
+      "available": 1
+    }
+  ]
+}
