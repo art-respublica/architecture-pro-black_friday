@@ -141,13 +141,16 @@ docker compose up -d
 
 # Задание 5: Service Discovery и балансировка с API Gateway
 
-Диаграммы расположены в папке /diagrams
-
 [Четвертый вариант схемы](/diagrams/task1_variant_4.drawio)
 
 
 # Задание 6: CDN
 
-Диаграммы расположены в папке /diagrams
-
 [Пятый вариант схемы](/diagrams/task1_variant_5.drawio)
+
+
+# Задание 7. Проектирование схем коллекций для шардирования данных
+
+Документы ADR расположены в папке /arch_decision_records
+
+[Архитектурный документ с описанием, схемами коллекций и примерами команд MongoDB](/arch_decision_records/ADR_Проектирование_коллекций.md)
